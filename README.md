@@ -3,7 +3,17 @@
 The goal of this project is to build a block based database. The data will be stored in a single file. Furthermore, each column will be indexed using a b-tree, with the indexing data being stored in individual files, with one file per indexed column.
 
 > [!NOTE]
->  The project was inspired by [this article](https://www.codeproject.com/Articles/1029838/Build-Your-Own-Database). It strikes a great balance of setting guide rails while not taking away the joy of figuring things out yourself. If you want to build a similar project, i would . 
+>  The project was inspired by [this article](https://www.codeproject.com/Articles/1029838/Build-Your-Own-Database). It strikes a great balance of setting guide rails while not taking away the joy of figuring things out yourself. If you want to build a similar project, i would .
+
+## Project goals 🎯
+
+To be considered successful, the database should fulfill the following critera:
+
+- [ ] The db should store numerical and text data in a table.
+- [ ] The db should support queries with a simple SQL-like syntax (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `WHERE`).
+- [ ] The `WHERE` should support full text search, including wildcards.
+- [ ] The `WHERE` should support equals, greater than, and less then operators for numeric values.
+- [ ] The db should be reasonably fast (benchmark to be determined).
 
 ## Technologies used 🛠
 <div style="display: flex; flex-direction: row; gap: 10px">
@@ -20,15 +30,7 @@ The main point of this project is to learn more about databases. I will use C# a
 3. **Clean Architecture**: The architecture should be reasonably clean and testable.
 4. **Reliability**: There should be reasonable test coverage.
 
-## Project goals 🎯
 
-To be considered successful, the database should fulfill the following critera:
-
-- [ ] The db should store numerical and text data in a table.
-- [ ] The db should support queries with a simple SQL-like syntax (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `WHERE`).
-- [ ] The `WHERE` should support full text search, including wildcards.
-- [ ] The `WHERE` should support equals, greater than, and less then operators for numeric values.
-- [ ] The db should be reasonably fast (benchmark to be determined).
 
 # Documentation
 
