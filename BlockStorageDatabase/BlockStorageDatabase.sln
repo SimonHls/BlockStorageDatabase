@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A667B2B7-5601-4AD1-BDEA-352632B24F06}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockStorageCLI", "src\BlockStorageCLI\BlockStorageCLI.csproj", "{67B2EBED-77F6-4A1F-B6DF-F27051C294AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockStorageDatabase", "src\BlockStorageDatabase\BlockStorageDatabase.csproj", "{B4B532FC-DA15-4CBB-B92A-251A0711CCA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5FF1BCFF-F87E-469F-994B-807956FE0821}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockStorageDatabaseTests", "tests\BlockStorageDatabaseTests\BlockStorageDatabaseTests.csproj", "{B3DD4FDC-E56A-44F2-9F29-B162940375D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67B2EBED-77F6-4A1F-B6DF-F27051C294AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B2EBED-77F6-4A1F-B6DF-F27051C294AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B2EBED-77F6-4A1F-B6DF-F27051C294AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B2EBED-77F6-4A1F-B6DF-F27051C294AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B532FC-DA15-4CBB-B92A-251A0711CCA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B532FC-DA15-4CBB-B92A-251A0711CCA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B532FC-DA15-4CBB-B92A-251A0711CCA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B532FC-DA15-4CBB-B92A-251A0711CCA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3DD4FDC-E56A-44F2-9F29-B162940375D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3DD4FDC-E56A-44F2-9F29-B162940375D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3DD4FDC-E56A-44F2-9F29-B162940375D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3DD4FDC-E56A-44F2-9F29-B162940375D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{67B2EBED-77F6-4A1F-B6DF-F27051C294AB} = {A667B2B7-5601-4AD1-BDEA-352632B24F06}
+		{B4B532FC-DA15-4CBB-B92A-251A0711CCA7} = {A667B2B7-5601-4AD1-BDEA-352632B24F06}
+		{B3DD4FDC-E56A-44F2-9F29-B162940375D8} = {5FF1BCFF-F87E-469F-994B-807956FE0821}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7620D23-D73F-4CC4-82BF-B93327A6AA9A}
+	EndGlobalSection
+EndGlobal
