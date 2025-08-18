@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlockStorageCLI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36a0fe4fd3990986afb6e40eac4518f7d60548ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ddf4604e374a488b6478ede5aaa63cc6dae153f")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlockStorageCLI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlockStorageCLI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
