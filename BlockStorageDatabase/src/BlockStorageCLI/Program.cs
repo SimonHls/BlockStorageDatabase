@@ -21,7 +21,7 @@ var path = @"C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDataba
 //}
 
 byte[] buffer = null;
-using (FileStream stm = new System.IO.FileStream(path,
+using (FileStream stm = new FileStream(path,
            FileMode.Open, FileAccess.Read, FileShare.None)) {
     buffer = new byte[stm.Length];
     stm.Read(buffer, 0, Convert.ToInt32(stm.Length));
