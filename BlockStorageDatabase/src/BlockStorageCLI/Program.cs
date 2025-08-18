@@ -1,20 +1,24 @@
-﻿using System.Text;
+﻿using BlockStorageCLI;
+using BlockStorageCore.Entities;
 
-string path = @"C:\Users\s.huelskamp\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageCLI\db\test.txt";
+var serializer = new BlogPostSerializer();
 
 
-//Open the stream and read it back.
-using (FileStream fs = File.OpenRead(path)) {
-    byte[] b = new byte[4096];
-    UTF8Encoding temp = new UTF8Encoding(true);
-    int readLen;
-    while ((readLen = fs.Read(b, 0, b.Length)) > 0) {
-        Console.WriteLine(temp.GetString(b, 0, readLen));
-    }
+var testPost = new BlogPost(
+    Id: Guid.NewGuid(),
+    AuthorId: 1,
+    PublishedUtc: DateTime.UtcNow,
+    Title: "Title",
+    Content: "content"
+);
+
+var bs = serializer.Serialize(testPost);
+
+foreach (var item in bs) {
+    Console.Write(item);
 }
 
-
-void AddText(FileStream fs, string value) {
-    byte[] info = new UTF8Encoding(true).GetBytes(value);
-    fs.Write(info, 0, info.Length);
-}
+BlogPost deserializedPost = serializer.Deserialize(bs);
+Console.WriteLine(deserializedPost.ToString());
+Console.WriteLine();
+Console.WriteLine(deserializedPost == testPost);

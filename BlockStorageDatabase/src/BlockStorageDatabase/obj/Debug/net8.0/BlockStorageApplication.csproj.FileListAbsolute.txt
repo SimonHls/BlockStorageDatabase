@@ -1,0 +1,16 @@
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\bin\Debug\net8.0\BlockStorageApplication.deps.json
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\bin\Debug\net8.0\BlockStorageApplication.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\bin\Debug\net8.0\BlockStorageApplication.pdb
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\bin\Debug\net8.0\BlockStorageCore.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\bin\Debug\net8.0\BlockStorageCore.pdb
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.csproj.AssemblyReference.cache
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.AssemblyInfoInputs.cache
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.AssemblyInfo.cs
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.csproj.CoreCompileInputs.cache
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.sourcelink.json
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockSto.70EFA1D4.Up2Date
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\refint\BlockStorageApplication.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\BlockStorageApplication.pdb
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageDatabase\obj\Debug\net8.0\ref\BlockStorageApplication.dll

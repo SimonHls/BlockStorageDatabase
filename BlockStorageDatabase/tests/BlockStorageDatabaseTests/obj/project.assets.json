@@ -5548,9 +5548,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageTests.csproj",
-      "projectName": "BlockStorageTests",
-      "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageTests.csproj",
+      "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageCoreTests.csproj",
+      "projectName": "BlockStorageCoreTests",
+      "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageCoreTests.csproj",
       "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,0 +1,217 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageCoreTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
+        "projectName": "BlockStorageCore",
+        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
+        "projectName": "BlockStorageApplication",
+        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+                "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageCoreTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageCoreTests.csproj",
+        "projectName": "BlockStorageCoreTests",
+        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageCoreTests.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+                "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+              },
+              "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {
+                "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.5.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

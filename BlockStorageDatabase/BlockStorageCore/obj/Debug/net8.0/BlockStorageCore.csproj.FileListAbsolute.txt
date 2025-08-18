@@ -1,0 +1,12 @@
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\bin\Debug\net8.0\BlockStorageCore.deps.json
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\bin\Debug\net8.0\BlockStorageCore.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\bin\Debug\net8.0\BlockStorageCore.pdb
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.AssemblyInfoInputs.cache
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.AssemblyInfo.cs
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.csproj.CoreCompileInputs.cache
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.sourcelink.json
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\refint\BlockStorageCore.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\BlockStorageCore.pdb
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\BlockStorageCore\obj\Debug\net8.0\ref\BlockStorageCore.dll
