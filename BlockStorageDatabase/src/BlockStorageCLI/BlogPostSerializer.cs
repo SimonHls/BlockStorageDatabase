@@ -1,4 +1,6 @@
-﻿using BlockStorageCore.Entities;
+﻿using System.Text;
+using BlockStorageCore.Entities;
+using BlockStorageCore.Helpers;
 
 namespace BlockStorageCLI {
     public class BlogPostSerializer {
@@ -7,42 +9,134 @@ namespace BlockStorageCLI {
         /// </summary>
         /// <param name="post">The post to serialize</param>
         /// <returns>A byte[] with the serialized post</returns>
-        public byte[] Serialize(BlogPost post) {
-
-            // Calculate all dynamic sized props
-            var titleBytes = System.Text.Encoding.UTF8.GetByteCount(post.Title);
-            var contentBytes = System.Text.Encoding.UTF8.GetByteCount(post.Content);
-
+        public byte[] Serialize(BlogPost post)
+        {
+            // current offset from byte[] origin
+            var offset = 0;
+            
+            var titleLength = BlogPostConstants.GetStringByteLength(post.Title);
+            var contentLength = BlogPostConstants.GetStringByteLength(post.Content);
+            
             // Add hard-coded length for static length properties
             var postByteArray = new byte[
-                16 +            // Guid
-                4 +             // AuthorId
-                8 +             // PublishedUtc
-                4 +             // Bytes to store the title length
-                titleBytes +    // Bytes for Title
-                4 +             // Bytes to store content length
-                contentBytes    // Bytes for Content
+                BlogPostConstants.GuidLength +
+                BlogPostConstants.AuthorIdLength +
+                BlogPostConstants.PublishedUtcLength +
+                BlogPostConstants.DynamicLengthIndicatorLength +
+                titleLength +
+                BlogPostConstants.DynamicLengthIndicatorLength +
+                contentLength
             ];
-
-            // Buffer.BlockCopy and put data into specific parts of an array of primitive types
 
             // Id
             Buffer.BlockCopy(
                 src: post.Id.ToByteArray(), // Guid has a ToByteArray method 👍
                 srcOffset: 0,
                 dst: postByteArray,
-                dstOffset: 0,
-                count: 16 // Guid is 16 bytes
+                dstOffset: offset,
+                count: BlogPostConstants.GuidLength 
             );
+            offset += BlogPostConstants.GuidLength;
 
             // AuthorId
             Buffer.BlockCopy(
-                src: LittleEnd,
+                src: 
+                LeByteConverter.GetBytes(post.AuthorId),
                 srcOffset: 0,
                 dst: postByteArray,
-                dstOffset: 0,
-                count: 16 // Guid is 16 bytes
+                dstOffset: offset,
+                count: BlogPostConstants.AuthorIdLength
             );
+            offset += BlogPostConstants.AuthorIdLength;
+            
+            // PublishedUtc
+            Buffer.BlockCopy(
+                src: LeByteConverter.GetBytes(post.PublishedUtc.ToBinary()),
+                srcOffset: 0,
+                dst: postByteArray,
+                dstOffset: offset,
+                count: BlogPostConstants.PublishedUtcLength
+            );
+            offset += BlogPostConstants.PublishedUtcLength;
+            
+            // Title length indicator
+            Buffer.BlockCopy(
+                src: LeByteConverter.GetBytes(titleLength), 
+                srcOffset: 0,
+                dst: postByteArray,
+                dstOffset: offset,
+                count: BlogPostConstants.DynamicLengthIndicatorLength
+            );
+            offset += BlogPostConstants.DynamicLengthIndicatorLength;
+            
+            // Title
+            Buffer.BlockCopy(
+                src: Encoding.UTF8.GetBytes(post.Title), 
+                srcOffset: 0,
+                dst: postByteArray,
+                dstOffset: offset,
+                count: titleLength
+            );
+            offset += BlogPostConstants.GetStringByteLength(post.Title);
+            
+            // Content length indicator
+            Buffer.BlockCopy(
+                src: LeByteConverter.GetBytes(contentLength), 
+                srcOffset: 0,
+                dst: postByteArray,
+                dstOffset: offset,
+                count: BlogPostConstants.DynamicLengthIndicatorLength
+            );
+            offset += BlogPostConstants.DynamicLengthIndicatorLength;
+            
+            // Title
+            Buffer.BlockCopy(
+                src: Encoding.UTF8.GetBytes(post.Content), 
+                srcOffset: 0,
+                dst: postByteArray,
+                dstOffset: offset,
+                count: contentLength
+            );
+            
+            return postByteArray;
+        }
+
+        public BlogPost Deserialize(byte[] bytes)
+        {
+            var post = new BlogPost();
+            var offset = 0;
+
+            // Read Id
+            post.Id = BufferHelper.ReadBufferGuid (bytes, offset);
+            offset += BlogPostConstants.GuidLength;
+            
+            // Read AuthorId
+            post.AuthorId = BufferHelper.ReadBufferInt32(bytes, offset);
+            offset += BlogPostConstants.AuthorIdLength;
+            
+            // Read PublishedUtd
+            post.PublishedUtc = DateTime.FromBinary(BufferHelper.ReadBufferInt64(bytes, offset));
+            offset += BlogPostConstants.PublishedUtcLength;
+            
+            // Read Title
+            var titleLength = BufferHelper.ReadBufferInt32 (bytes, offset);
+            offset += BlogPostConstants.DynamicLengthIndicatorLength;
+            if (titleLength is < 0 or > BlogPostConstants.MaxTitleLength) {
+                throw new Exception ("Invalid string length: " + titleLength);
+            }
+            post.Title = System.Text.Encoding.UTF8.GetString(bytes, offset, titleLength);
+            offset += titleLength;
+            
+            // Read Content
+            var contentLength = BufferHelper.ReadBufferInt32 (bytes, offset);
+            offset += BlogPostConstants.DynamicLengthIndicatorLength;
+            if (contentLength is < 0 or > BlogPostConstants.MaxContentLength) {
+                throw new Exception ("Invalid string length: " + contentLength);
+            }
+            post.Content = System.Text.Encoding.UTF8.GetString(bytes, offset, contentLength);
+
+            // Return constructed model
+            return post;
         }
     }
 }

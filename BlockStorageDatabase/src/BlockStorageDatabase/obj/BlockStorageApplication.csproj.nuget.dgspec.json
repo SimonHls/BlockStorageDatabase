@@ -1,25 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {}
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
+        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
         "projectName": "BlockStorageCore",
-        "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
-        "packagesPath": "C:\\Users\\s.huelskamp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\obj\\",
+        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\s.huelskamp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,26 +60,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.316/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
+        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
         "projectName": "BlockStorageApplication",
-        "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
-        "packagesPath": "C:\\Users\\s.huelskamp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\obj\\",
+        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
+        "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\s.huelskamp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -98,8 +88,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
-                "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+              "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+                "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
               }
             }
           }
@@ -134,7 +124,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.316/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
