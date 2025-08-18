@@ -4,14 +4,14 @@
     "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+    "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
+        "projectUniqueName": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj",
         "projectName": "BlockStorageCore",
-        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj",
+        "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj",
         "packagesPath": "C:\\Users\\simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\obj\\",
+        "outputPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\simon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -88,8 +88,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
-                "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+              "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj": {
+                "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj"
               }
             }
           }

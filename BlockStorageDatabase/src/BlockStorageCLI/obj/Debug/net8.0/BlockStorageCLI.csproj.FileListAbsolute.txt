@@ -32,3 +32,5 @@ C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockS
 C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageCLI\obj\Debug\net8.0\BlockStorageCLI.pdb
 C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageCLI\obj\Debug\net8.0\BlockStorageCLI.genruntimeconfig.cache
 C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageCLI\obj\Debug\net8.0\ref\BlockStorageCLI.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageCLI\bin\Debug\net8.0\BlockStorageApplication.dll
+C:\Users\simon\source\repos\BlockStorageDatabase\BlockStorageDatabase\src\BlockStorageCLI\bin\Debug\net8.0\BlockStorageApplication.pdb

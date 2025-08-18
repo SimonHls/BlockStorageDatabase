@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "o1I54gbrrLsViVNd9NAH8wK60+0fepim6PN/MSOxHLYLihS/ymg5VC6HbONLn4vRWcE2sOnV9mQPRp9bqxV0FA==",
-  "success": false,
+  "dgSpecHash": "I63dJ8yDfFE7R0LZ1VpxNsjvMdjRNxP47SJ4ZIIAtuNHBYA2gKwVcxewhB42mFdS3IF/uSUc0XvpLtFhRd3TVA==",
+  "success": true,
   "projectFilePath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlogStorageCLITests\\BlogStorageCLITests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\simon\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
@@ -94,15 +94,5 @@
     "C:\\Users\\simon\\.nuget\\packages\\xunit.extensibility.execution\\2.5.3\\xunit.extensibility.execution.2.5.3.nupkg.sha512",
     "C:\\Users\\simon\\.nuget\\packages\\xunit.runner.visualstudio\\2.5.3\\xunit.runner.visualstudio.2.5.3.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\src\\BlockStorageCLI\\BlockStorageCLI.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\src\\BlockStorageCLI\\BlockStorageCLI.csproj",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

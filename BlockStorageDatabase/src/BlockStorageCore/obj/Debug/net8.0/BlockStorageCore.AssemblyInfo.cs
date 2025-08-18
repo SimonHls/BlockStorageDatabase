@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlockStorageCore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ddf4604e374a488b6478ede5aaa63cc6dae153f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1da977c44cc4a1edea8220a982fdb67618e0d74d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlockStorageCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlockStorageCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

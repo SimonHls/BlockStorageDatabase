@@ -17,8 +17,8 @@
   "libraries": {
     "BlockStorageCore/1.0.0": {
       "type": "project",
-      "path": "../../BlockStorageCore/BlockStorageCore.csproj",
-      "msbuildProject": "../../BlockStorageCore/BlockStorageCore.csproj"
+      "path": "../BlockStorageCore/BlockStorageCore.csproj",
+      "msbuildProject": "../BlockStorageCore/BlockStorageCore.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -53,8 +53,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
-              "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+            "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj": {
+              "projectPath": "C:\\Users\\simon\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageCore\\BlockStorageCore.csproj"
             }
           }
         }
