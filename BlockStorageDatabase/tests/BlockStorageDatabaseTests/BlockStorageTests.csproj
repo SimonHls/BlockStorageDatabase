@@ -17,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlockStorageCore\BlockStorageCore.csproj" />
+    <ProjectReference Include="..\..\src\BlockStorageDatabase\BlockStorageApplication.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

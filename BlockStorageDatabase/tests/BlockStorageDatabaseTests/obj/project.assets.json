@@ -1708,6 +1708,29 @@
         "build": {
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
+      },
+      "BlockStorageApplication/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "BlockStorageCore": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BlockStorageApplication.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BlockStorageApplication.dll": {}
+        }
+      },
+      "BlockStorageCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/BlockStorageCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BlockStorageCore.dll": {}
+        }
       }
     }
   },
@@ -5497,10 +5520,22 @@
         "xunit.runner.visualstudio.2.5.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "BlockStorageApplication/1.0.0": {
+      "type": "project",
+      "path": "../../src/BlockStorageDatabase/BlockStorageApplication.csproj",
+      "msbuildProject": "../../src/BlockStorageDatabase/BlockStorageApplication.csproj"
+    },
+    "BlockStorageCore/1.0.0": {
+      "type": "project",
+      "path": "../../BlockStorageCore/BlockStorageCore.csproj",
+      "msbuildProject": "../../BlockStorageCore/BlockStorageCore.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "BlockStorageApplication >= 1.0.0",
+      "BlockStorageCore >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
       "coverlet.collector >= 6.0.0",
       "xunit >= 2.5.3",
@@ -5515,9 +5550,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageDatabaseTests.csproj",
-      "projectName": "BlockStorageDatabaseTests",
-      "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageDatabaseTests.csproj",
+      "projectUniqueName": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageTests.csproj",
+      "projectName": "BlockStorageTests",
+      "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageTests.csproj",
       "packagesPath": "C:\\Users\\s.huelskamp\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\obj\\",
       "projectStyle": "PackageReference",
@@ -5540,7 +5575,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+              "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+            },
+            "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj": {
+              "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

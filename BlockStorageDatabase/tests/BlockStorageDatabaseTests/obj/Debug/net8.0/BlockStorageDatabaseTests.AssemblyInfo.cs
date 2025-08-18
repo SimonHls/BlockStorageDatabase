@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlockStorageDatabaseTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7eed1fd19161c51b36c35b5eff86edd1ae069ffd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c89814ef707c4cc4edf07445e6dd10b46b305e5")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlockStorageDatabaseTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlockStorageDatabaseTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

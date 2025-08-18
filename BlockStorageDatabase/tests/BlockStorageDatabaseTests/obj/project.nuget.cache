@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XDtDCzx5Ljs=",
+  "dgSpecHash": "ls/RTJQ+QPw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageDatabaseTests.csproj",
+  "projectFilePath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\tests\\BlockStorageDatabaseTests\\BlockStorageTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\s.huelskamp\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\s.huelskamp\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",

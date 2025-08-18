@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "BlockStorageCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/BlockStorageCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BlockStorageCore.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "BlockStorageCore/1.0.0": {
+      "type": "project",
+      "path": "../../BlockStorageCore/BlockStorageCore.csproj",
+      "msbuildProject": "../../BlockStorageCore/BlockStorageCore.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "BlockStorageCore >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\s.huelskamp\\.nuget\\packages\\": {},
@@ -15,9 +34,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageDatabase.csproj",
-      "projectName": "BlockStorageDatabase",
-      "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageDatabase.csproj",
+      "projectUniqueName": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
+      "projectName": "BlockStorageApplication",
+      "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\BlockStorageApplication.csproj",
       "packagesPath": "C:\\Users\\s.huelskamp\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\src\\BlockStorageDatabase\\obj\\",
       "projectStyle": "PackageReference",
@@ -40,7 +59,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj": {
+              "projectPath": "C:\\Users\\s.huelskamp\\source\\repos\\BlockStorageDatabase\\BlockStorageDatabase\\BlockStorageCore\\BlockStorageCore.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
