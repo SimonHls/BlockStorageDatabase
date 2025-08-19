@@ -11,15 +11,15 @@ public class Block : IBlock {
     public bool IsDirty { get; set; }
 
     private BlockHeader _header;
-    private byte[] _data;
+    public byte[] Data { get; set; }
     private readonly int _blockSize;
 
     public Block(ulong Id, int blockSize) {
         _header = new BlockHeader();
         _header.Initialize(Id);
         _blockSize = blockSize;
-        _data = new byte[blockSize - BlockHeader.SizeInBytes];
-        IsDirty = false;
+        this.Data = new byte[blockSize - BlockHeader.SizeInBytes];
+        this.IsDirty = false;
         this.Id = Id;
     }
 
@@ -31,14 +31,14 @@ public class Block : IBlock {
         if (dst == null) {
             throw new ArgumentNullException(nameof(dst));
         }
-        if (srcOffset < 0 || count < 0 || srcOffset + count > _data.Length) {
+        if (srcOffset < 0 || count < 0 || srcOffset + count > Data.Length) {
             throw new ArgumentOutOfRangeException(nameof(srcOffset), "Read would go beyond the bounds of the block's data.");
         }
         if (dstOffset < 0 || dstOffset + count > dst.Length) {
             throw new ArgumentOutOfRangeException(nameof(dstOffset), "Read would go beyond the bounds of the destination buffer.");
         }
         Buffer.BlockCopy(
-            src: _data,
+            src: Data,
             srcOffset,
             dst,
             dstOffset,
@@ -55,7 +55,7 @@ public class Block : IBlock {
         if (src == null) {
             throw new ArgumentNullException(nameof(src));
         }
-        if (dstOffset < 0 || count < 0 || dstOffset + count > _data.Length) {
+        if (dstOffset < 0 || count < 0 || dstOffset + count > Data.Length) {
             throw new ArgumentOutOfRangeException(nameof(srcOffset), "Write would go beyond the bounds of the block's data.");
         }
         if (srcOffset < 0 || srcOffset + count > src.Length) {
@@ -65,7 +65,7 @@ public class Block : IBlock {
         Buffer.BlockCopy(
             src,
             srcOffset,
-            _data,
+            Data,
             dstOffset,
             count
         );

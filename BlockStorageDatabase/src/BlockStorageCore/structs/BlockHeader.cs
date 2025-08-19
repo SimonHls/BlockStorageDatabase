@@ -12,7 +12,8 @@ public struct BlockHeader {
     private ulong _flagsAndMetadata; // For block type and data length
 
     public const ulong ExpectedMagicNumber = 0xBAAAAAAD_F0CACC1A; // Buon Giorno
-    public const int SizeInBytes = 4 * 8; // 4 fields á 8 bytes
+    public const int FieldCount = 4;
+    public const int SizeInBytes = FieldCount * 8; // x fields á 8 bytes
 
     public BlockType BlockType {
         get => (BlockType)(_flagsAndMetadata & 0xFF); // Get the first byte
