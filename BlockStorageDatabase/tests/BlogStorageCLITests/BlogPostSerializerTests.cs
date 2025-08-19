@@ -1,5 +1,5 @@
 using BlockStorageCLI;
-using BlockStorageCore.Entities;
+using BlockStorageCore.Models;
 
 namespace BlogStorageCLITests;
 
@@ -17,8 +17,8 @@ public class BlogPostSerializerTests {
             Content: "content"
         );
 
+        // Act
         var bs = serializer.Serialize(testPost);
-
         BlogPost deserializedPost = serializer.Deserialize(bs);
 
         // Assert

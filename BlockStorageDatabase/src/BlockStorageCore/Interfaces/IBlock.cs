@@ -1,0 +1,34 @@
+﻿using BlockStorageCore.Enums;
+
+namespace BlockStorageCore.Interfaces;
+
+public interface IBlock {
+    /// <summary>
+    /// Id of the block, must be unique
+    /// </summary>
+    ulong Id {
+        get;
+    }
+
+    /// <summary>
+    /// A block may contain one ore more header metadata, 
+    /// each header identified by a number and 8 bytes value.
+    /// </summary>
+    ulong GetHeader(HeaderField field);
+
+    /// <summary>
+    /// Change the value of specified header.
+    /// Data must not be written to disk until the block is disposed.
+    /// </summary>
+    void SetHeader(HeaderField field, ulong value);
+
+    /// <summary>
+    /// Read content of this block (src) into given buffer (dst)
+    /// </summary>
+    void Read(byte[] dst, int dstOffset, int srcOffset, int count);
+
+    /// <summary>
+    /// Write content of given buffer (src) into this (dst)
+    /// </summary>
+    void Write(byte[] src, int srcOffset, int dstOffset, int count);
+}

@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlockStorageCore\BlockStorageCore.csproj" />
-    <ProjectReference Include="..\BlockStorageDatabase\BlockStorageApplication.csproj" />
   </ItemGroup>
 
 </Project>

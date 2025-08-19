@@ -1,5 +1,7 @@
-﻿using BlockStorageCore.Entities;
+﻿using BlockStorageCore.Constants;
 using BlockStorageCore.Helpers;
+using BlockStorageCore.Interfaces;
+using BlockStorageCore.Models;
 using System.Text;
 
 namespace BlockStorageCLI {
@@ -13,8 +15,8 @@ namespace BlockStorageCLI {
             // current offset from byte[] origin
             var offset = 0;
 
-            var titleLength = BlogPostConstants.GetStringByteLength(post.Title);
-            var contentLength = BlogPostConstants.GetStringByteLength(post.Content);
+            var titleLength = BufferHelper.GetByteLength(post.Title);
+            var contentLength = BufferHelper.GetByteLength(post.Content);
 
             // Add hard-coded length for static length properties
             var postByteArray = new byte[
@@ -76,7 +78,7 @@ namespace BlockStorageCLI {
                 dstOffset: offset,
                 count: titleLength
             );
-            offset += BlogPostConstants.GetStringByteLength(post.Title);
+            offset += BufferHelper.GetByteLength(post.Title);
 
             // Content length indicator
             Buffer.BlockCopy(
@@ -118,19 +120,19 @@ namespace BlockStorageCLI {
 
             // Read Title
             var titleLength = BufferHelper.ReadBufferInt32(bytes, offset);
-            offset += BlogPostConstants.DynamicLengthIndicatorLength;
             if (titleLength is < 0 or > BlogPostConstants.MaxTitleLength) {
                 throw new Exception("Invalid string length: " + titleLength);
             }
+            offset += BlogPostConstants.DynamicLengthIndicatorLength;
             var postTitle = Encoding.UTF8.GetString(bytes, offset, titleLength);
             offset += titleLength;
 
             // Read Content
             var contentLength = BufferHelper.ReadBufferInt32(bytes, offset);
-            offset += BlogPostConstants.DynamicLengthIndicatorLength;
             if (contentLength is < 0 or > BlogPostConstants.MaxContentLength) {
                 throw new Exception("Invalid string length: " + contentLength);
             }
+            offset += BlogPostConstants.DynamicLengthIndicatorLength;
             var postContent = Encoding.UTF8.GetString(bytes, offset, contentLength);
 
             // Return constructed model

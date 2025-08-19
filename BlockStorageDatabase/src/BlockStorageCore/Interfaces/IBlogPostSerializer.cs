@@ -1,6 +1,6 @@
-﻿using BlockStorageCore.Entities;
+﻿using BlockStorageCore.Models;
 
-namespace BlockStorageCLI {
+namespace BlockStorageCore.Interfaces {
     public interface IBlogPostSerializer {
         BlogPost Deserialize(byte[] bytes);
         byte[] Serialize(BlogPost post);
