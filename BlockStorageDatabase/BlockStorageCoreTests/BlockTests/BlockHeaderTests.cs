@@ -1,7 +1,11 @@
 using BlockStorageCore.Entities;
 
-namespace BlockStorageCoreTests;
+namespace BlockStorageCoreTests.BlockTests;
 
+/// <summary>
+/// Tests for the block methods touching the block header,
+/// ReadHeader() and WriteHeader()
+/// </summary>
 public class BlockHeaderTests : IDisposable {
 
     private readonly MemoryStream _stream;
@@ -17,7 +21,7 @@ public class BlockHeaderTests : IDisposable {
         }
         _stream.Position = 0;
 
-        _block = new Block(_stream, blockSize: 4096, blockId: 0);
+        _block = new Block(_stream, blockId: 0);
     }
 
     public void Dispose() {

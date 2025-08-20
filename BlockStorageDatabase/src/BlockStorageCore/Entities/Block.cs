@@ -5,51 +5,67 @@ using BlockStorageCore.Interfaces;
 namespace BlockStorageCore.Entities;
 public class Block : IBlock {
 
+    // TODO: Enhancement -> When initializing the block from the BlockStorage, we can instantly read the first few bytes from the block
+    // and pass them as an argument to the Block instance. Any reads and writes can then first access this section.
+    // Reading and writing from header would not require accessing the stream, and sometimes the section might even contain all the data we need.
+
     public uint Id { get; set; }
     private Stream _stream;
-    private readonly int _blockSize;
 
-    private bool isDisposed = false;
+    private bool _isDisposed = false;
 
     // variable to track if the block was changed after the intial read
-    private bool pendingChanges = false;
+    private bool _pendingChanges = false;
 
     // We store header data in a cache, so we can get it faster on second reads
-    public long?[] headerCache = new long?[BlockConstants.HeaderFieldCount];
+    private long?[] _headerCache = new long?[BlockConstants.HeaderFieldCount];
 
-    public Block(Stream stream, int blockSize, uint blockId) {
+    private readonly long _blockDataSectionStart;
+
+    public Block(Stream stream, uint blockId) {
         _stream = stream;
-        _blockSize = blockSize;
         Id = blockId;
+        _blockDataSectionStart = Id * BlockConstants.TotalSize + BlockConstants.HeaderSize;
     }
 
     public long GetHeader(int field) {
         // Todo: Headers could also be an enum, this would be way more readable
 
-        if (isDisposed)
+        if (_isDisposed)
             throw new ObjectDisposedException(nameof(Block));
 
         if (field < 0 || field > BlockConstants.HeaderFieldCount)
             throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, index out of range.");
 
-        long positionInStream = _blockSize * Id + (long)field * BlockConstants.HeaderFieldSize;
+        // Check cache first
+        long? valueFromCache = _headerCache[field];
+        if (field < _headerCache.Length && valueFromCache != null)
+            return (long)valueFromCache;
+
+        // Not in cache -> read value from stream
+        long positionInStream = BlockConstants.TotalSize * Id + (long)field * BlockConstants.HeaderFieldSize;
         if (positionInStream > _stream.Length || positionInStream < 0)
             throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, calculated header position is outside the stream,");
 
         var buffer = new byte[BlockConstants.HeaderFieldSize];
         _stream.Seek(positionInStream, (int)SeekOrigin.Begin);
         _stream.Read(buffer, 0, BlockConstants.HeaderFieldSize);
-        return BufferHelper.ReadBufferInt64(buffer, 0);
+
+        long valueFromStream = BufferHelper.ReadBufferInt64(buffer, 0);
+
+        _headerCache[field] = valueFromStream;
+
+        return valueFromStream;
     }
 
     public void SetHeader(int field, long value) {
-        if (isDisposed)
+        if (_isDisposed)
             throw new ObjectDisposedException(nameof(Block));
 
         if (field < 0 || field > BlockConstants.HeaderFieldCount)
             throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, index out of range.");
 
-        long positionInStream = _blockSize * Id + (long)field * BlockConstants.HeaderFieldSize;
+        long positionInStream = BlockConstants.TotalSize * Id + (long)field * BlockConstants.HeaderFieldSize;
         if (positionInStream > _stream.Length || positionInStream < 0)
             throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, calculated header position is outside the stream,");
 
@@ -57,25 +73,67 @@ public class Block : IBlock {
 
         BufferHelper.WriteBuffer(value, valueBuffer, (int)SeekOrigin.Begin);
 
+        _headerCache[field] = value;
+
         _stream.Seek(positionInStream, 0);
         _stream.Write(valueBuffer, 0, valueBuffer.Length);
+        _pendingChanges = true;
     }
 
     public void Read(byte[] dst, int dstOffset, int srcOffset, int count) {
-        throw new NotImplementedException();
+        if (_isDisposed)
+            throw new ObjectDisposedException(nameof(Block));
+
+        if (dst == null)
+            throw new ArgumentNullException(nameof(dst));
+
+        if (dstOffset < 0 || srcOffset < 0 || count < 0)
+            throw new ArgumentOutOfRangeException("Offsets and count cannot be negative.");
+
+        if (dstOffset + count > dst.Length)
+            throw new ArgumentException("Read operation would overflow the destination buffer.");
+
+        if (srcOffset + count > BlockConstants.DataSectionSize)
+            throw new ArgumentException("Read operation would exceed the block's data boundaries.");
+
+        long absoluteReadPosition = _blockDataSectionStart + srcOffset;
+
+        _stream.Seek(absoluteReadPosition, origin: 0);
+        _stream.Read(buffer: dst, offset: dstOffset, count);
     }
 
     public void Write(byte[] src, int srcOffset, int dstOffset, int count) {
-        throw new NotImplementedException();
+        if (_isDisposed)
+            throw new ObjectDisposedException(nameof(Block));
+
+        if (src == null)
+            throw new ArgumentNullException(nameof(src));
+
+        if (dstOffset < 0 || srcOffset < 0 || count < 0)
+            throw new ArgumentOutOfRangeException("Offsets and count cannot be negative.");
+
+        if (dstOffset + count > BlockConstants.DataSectionSize)
+            throw new ArgumentException("Write operation would overflow the blocks data section size.");
+
+        if (srcOffset + count > src.Length)
+            throw new ArgumentException("Write operation would exceed the source data boundaries");
+
+        long absoluteWritePosition = _blockDataSectionStart + dstOffset;
+
+        _stream.Seek(absoluteWritePosition, origin: 0);
+        _stream.Write(src, srcOffset, count);
+
+        _pendingChanges = true;
     }
 
     public void Dispose() {
-        if (pendingChanges) {
+        if (_pendingChanges) {
             _stream.Flush();
         }
-        if (!isDisposed) {
+        if (!_isDisposed) {
             _stream.Dispose();
-            isDisposed = true;
+            _isDisposed = true;
+            _pendingChanges = false;
         }
     }
 }
