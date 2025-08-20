@@ -1,12 +1,10 @@
-﻿using BlockStorageCore.Enums;
+﻿namespace BlockStorageCore.Interfaces;
 
-namespace BlockStorageCore.Interfaces;
-
-public interface IBlock {
+public interface IBlock : IDisposable {
     /// <summary>
     /// Id of the block, must be unique
     /// </summary>
-    ulong Id {
+    uint Id {
         get;
     }
 
@@ -14,13 +12,13 @@ public interface IBlock {
     /// A block may contain one ore more header metadata, 
     /// each header identified by a number and 8 bytes value.
     /// </summary>
-    ulong GetHeader(HeaderField field);
+    long GetHeader(int field);
 
     /// <summary>
     /// Change the value of specified header.
     /// Data must not be written to disk until the block is disposed.
     /// </summary>
-    void SetHeader(HeaderField field, ulong value);
+    void SetHeader(int field, long value);
 
     /// <summary>
     /// Read content of this block (src) into given buffer (dst)

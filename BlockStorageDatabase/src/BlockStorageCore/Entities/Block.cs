@@ -1,76 +1,56 @@
-﻿using BlockStorageCore.Enums;
+﻿using BlockStorageCore.Constants;
+using BlockStorageCore.Helpers;
 using BlockStorageCore.Interfaces;
-using BlockStorageCore.structs;
 
 namespace BlockStorageCore.Entities;
-
 public class Block : IBlock {
 
-
-    public ulong Id { get; init; }
-    public bool IsDirty { get; set; }
-
-    private BlockHeader _header;
-    public byte[] Data { get; set; }
+    public uint Id { get; set; }
+    private Stream _stream;
     private readonly int _blockSize;
 
-    public Block(ulong Id, int blockSize) {
-        _header = new BlockHeader();
-        _header.Initialize(Id);
+    // variable to track if the block was changed
+    private bool pendingChanges = false;
+
+    // The block data
+    public byte[] Header { get; set; }
+    public byte[] Data { get; set; }
+
+    public Block(Stream stream, int blockSize, uint blockId) {
+        _stream = stream;
         _blockSize = blockSize;
-        this.Data = new byte[blockSize - BlockHeader.SizeInBytes];
-        this.IsDirty = false;
-        this.Id = Id;
+        Data = new byte[blockSize];
+        Header = new byte[BlockConstants.HeaderSize];
+        Id = blockId;
     }
 
-    public ulong GetHeader(HeaderField field) {
-        return _header.GetHeader(field);
+    public void Dispose() {
+        if (pendingChanges)
+            // We dump the block into the stack
+            throw new NotImplementedException();
+        else
+            // we dispose the block
+            throw new NotImplementedException();
+    }
+
+    public long GetHeader(int field) {
+        // Todo: Headers could also be an enum, this would be way more readable
+        var buffer = new byte[BlockConstants.HeaderFieldSize];
+        long positionInStream = _blockSize * Id + (long)field * BlockConstants.HeaderFieldSize;
+        _stream.Seek(positionInStream, 0);
+        _stream.Read(buffer, 0, BlockConstants.HeaderFieldSize);
+        return BufferHelper.ReadBufferInt64(buffer, 0);
     }
 
     public void Read(byte[] dst, int dstOffset, int srcOffset, int count) {
-        if (dst == null) {
-            throw new ArgumentNullException(nameof(dst));
-        }
-        if (srcOffset < 0 || count < 0 || srcOffset + count > Data.Length) {
-            throw new ArgumentOutOfRangeException(nameof(srcOffset), "Read would go beyond the bounds of the block's data.");
-        }
-        if (dstOffset < 0 || dstOffset + count > dst.Length) {
-            throw new ArgumentOutOfRangeException(nameof(dstOffset), "Read would go beyond the bounds of the destination buffer.");
-        }
-        Buffer.BlockCopy(
-            src: Data,
-            srcOffset,
-            dst,
-            dstOffset,
-            count
-        );
+        throw new NotImplementedException();
     }
 
-    public void SetHeader(HeaderField field, ulong value) {
-        _header.SetHeader(field, value);
-        IsDirty = true;
+    public void SetHeader(int field, long value) {
+        throw new NotImplementedException();
     }
 
     public void Write(byte[] src, int srcOffset, int dstOffset, int count) {
-        if (src == null) {
-            throw new ArgumentNullException(nameof(src));
-        }
-        if (dstOffset < 0 || count < 0 || dstOffset + count > Data.Length) {
-            throw new ArgumentOutOfRangeException(nameof(srcOffset), "Write would go beyond the bounds of the block's data.");
-        }
-        if (srcOffset < 0 || srcOffset + count > src.Length) {
-            throw new ArgumentOutOfRangeException(nameof(dstOffset), "Write would go beyond the bounds of the source buffer.");
-        }
-
-        Buffer.BlockCopy(
-            src,
-            srcOffset,
-            Data,
-            dstOffset,
-            count
-        );
-
-        IsDirty = true;
+        throw new NotImplementedException();
     }
-
 }

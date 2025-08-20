@@ -10,5 +10,6 @@ public static class ByteLengths {
     public const int Int64Len = 8;
     public const int DoubleLen = 8;
     public const int LongLen = 8;
+    public const int ULongLen = 8;
     public const int DateTimeLen = 8;
 }
