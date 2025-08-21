@@ -1,4 +1,5 @@
 using BlockStorageCore.Entities;
+using BlockStorageCore.Enums;
 
 namespace BlockStorageCoreTests.BlockTests;
 
@@ -32,7 +33,7 @@ public class BlockHeaderTests : IDisposable {
     [Fact]
     public void GetHeader_ReturnsCorrectHeaderFromValidStream() {
         // == Act ==
-        var headerVal = _block.GetHeader(1);
+        var headerVal = _block.GetHeader(BlockHeader.PreviousBlockId); // This is field id 1
 
         // == Assert ==
         Assert.Equal(2, headerVal);
@@ -44,7 +45,7 @@ public class BlockHeaderTests : IDisposable {
         _block.Dispose();
 
         // == Act ==
-        Action act = () => _block.GetHeader(1); ;
+        Action act = () => _block.GetHeader(BlockHeader.PreviousBlockId); // This is field id 1
         var ex = Record.Exception(act);
 
         // == Assert ==
@@ -55,8 +56,9 @@ public class BlockHeaderTests : IDisposable {
     [Fact]
     public void SetHeader_CanUpdateHeaderValueOnValidStream() {
         // == Act ==
-        _block.SetHeader(1, 3); // change index 1 from 2 to 3
-        var headerVal = _block.GetHeader(1);
+        var targetHeader = BlockHeader.NextBlockId;
+        _block.SetHeader(targetHeader, 3); // change index 1 from 2 to 3
+        var headerVal = _block.GetHeader(targetHeader); // This is field id 1
 
         // == Assert ==
         Assert.Equal(3, headerVal);
@@ -68,7 +70,7 @@ public class BlockHeaderTests : IDisposable {
         _block.Dispose();
 
         // == Act ==
-        Action act = () => _block.SetHeader(1, 3);
+        Action act = () => _block.SetHeader(BlockHeader.NextBlockId, 3);
         var ex = Record.Exception(act);
 
         // == Assert ==

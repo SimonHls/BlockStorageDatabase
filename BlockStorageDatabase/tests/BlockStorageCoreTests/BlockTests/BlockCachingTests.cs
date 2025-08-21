@@ -1,4 +1,5 @@
 ﻿using BlockStorageCore.Entities;
+using BlockStorageCore.Enums;
 using Moq;
 
 namespace BlockStorageCoreTests.BlockTests;
@@ -11,7 +12,7 @@ public class BlockCachingTests {
 
         var mockStream = new Mock<Stream>();
         long expectedValue = 99L;
-        int fieldIndex = 1;
+
 
         mockStream
             .Setup(s => s.Read(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
@@ -29,10 +30,10 @@ public class BlockCachingTests {
         // == Act ==
 
         // Call 1 -> This should go to the stream to get the value.
-        var value1 = block.GetHeader(fieldIndex);
+        var value1 = block.GetHeader(BlockHeader.PreviousBlockId);
 
         // Call 2 -> This should hit the cache
-        var value2 = block.GetHeader(fieldIndex);
+        var value2 = block.GetHeader(BlockHeader.PreviousBlockId);
 
         // == Assert ==
 
@@ -54,14 +55,14 @@ public class BlockCachingTests {
 
         var block = new Block(mockStream.Object, blockId: 0);
         long newValue = 123L;
-        int fieldIndex = 2;
+        BlockHeader header = BlockHeader.RecordLength;
 
         // == Act ==
         // SetHeader should write to the stream and update the cache.
-        block.SetHeader(fieldIndex, newValue);
+        block.SetHeader(header, newValue);
 
         // GetHeader should find the value in the cache
-        var result = block.GetHeader(fieldIndex);
+        var result = block.GetHeader(header);
 
         // == Assert ==
         Assert.Equal(newValue, result);

@@ -1,4 +1,5 @@
 ﻿using BlockStorageCore.Constants;
+using BlockStorageCore.Enums;
 using BlockStorageCore.Helpers;
 using BlockStorageCore.Interfaces;
 
@@ -32,24 +33,21 @@ public class Block : IBlock {
         _blockDataSectionStart = Id * BlockConstants.TotalSize + BlockConstants.HeaderSize;
     }
 
-    public long GetHeader(int field) {
+    public long GetHeader(BlockHeader header) {
         // Todo: Headers could also be an enum, this would be way more readable
 
         if (_isDisposed)
             throw new ObjectDisposedException(nameof(Block));
 
-        if (field < 0 || field > BlockConstants.HeaderFieldCount)
-            throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, index out of range.");
-
         // Check cache first
-        long? valueFromCache = _headerCache[field];
-        if (field < _headerCache.Length && valueFromCache != null)
+        long? valueFromCache = _headerCache[(int)header];
+        if ((int)header < _headerCache.Length && valueFromCache != null)
             return (long)valueFromCache;
 
         // Not in cache -> read value from stream
-        long positionInStream = BlockConstants.TotalSize * Id + (long)field * BlockConstants.HeaderFieldSize;
+        long positionInStream = BlockConstants.TotalSize * Id + (long)header * BlockConstants.HeaderFieldSize;
         if (positionInStream > _stream.Length || positionInStream < 0)
-            throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, calculated header position is outside the stream,");
+            throw new ArgumentOutOfRangeException(nameof(header), "Could not get header, calculated header position is outside the stream,");
 
         var buffer = new byte[BlockConstants.HeaderFieldSize];
         _stream.Seek(positionInStream, (int)SeekOrigin.Begin);
@@ -57,27 +55,24 @@ public class Block : IBlock {
 
         long valueFromStream = BufferHelper.ReadBufferInt64(buffer, 0);
 
-        _headerCache[field] = valueFromStream;
+        _headerCache[(int)header] = valueFromStream;
 
         return valueFromStream;
     }
 
-    public void SetHeader(int field, long value) {
+    public void SetHeader(BlockHeader header, long value) {
         if (_isDisposed)
             throw new ObjectDisposedException(nameof(Block));
 
-        if (field < 0 || field > BlockConstants.HeaderFieldCount)
-            throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, index out of range.");
-
-        long positionInStream = BlockConstants.TotalSize * Id + (long)field * BlockConstants.HeaderFieldSize;
+        long positionInStream = BlockConstants.TotalSize * Id + (long)header * BlockConstants.HeaderFieldSize;
         if (positionInStream > _stream.Length || positionInStream < 0)
-            throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, calculated header position is outside the stream,");
+            throw new ArgumentOutOfRangeException(nameof(header), "Could not get header, calculated header position is outside the stream,");
 
         var valueBuffer = new byte[ByteLengths.LongLen];
 
         BufferHelper.WriteBuffer(value, valueBuffer, (int)SeekOrigin.Begin);
 
-        _headerCache[field] = value;
+        _headerCache[(int)header] = value;
 
         _stream.Seek(positionInStream, 0);
         _stream.Write(valueBuffer, 0, valueBuffer.Length);
