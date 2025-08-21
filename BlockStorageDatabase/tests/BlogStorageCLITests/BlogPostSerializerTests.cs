@@ -1,5 +1,5 @@
 using BlockStorageCLI;
-using BlockStorageCore.Models;
+using BlockStorageCLI.Models;
 
 namespace BlogStorageCLITests;
 

@@ -1,7 +1,7 @@
-﻿using BlockStorageCore.Constants;
+﻿using BlockStorageCLI.Interfaces;
+using BlockStorageCLI.Models;
+using BlockStorageCore.Constants;
 using BlockStorageCore.Helpers;
-using BlockStorageCore.Interfaces;
-using BlockStorageCore.Models;
 using System.Text;
 
 namespace BlockStorageCLI {

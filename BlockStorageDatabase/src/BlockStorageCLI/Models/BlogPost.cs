@@ -1,4 +1,4 @@
-﻿namespace BlockStorageCore.Models;
+﻿namespace BlockStorageCLI.Models;
 //public class BlogPost
 //{
 //    public Guid Id {get; set; } // 16 bytes
