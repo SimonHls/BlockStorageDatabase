@@ -8,11 +8,15 @@ public class Block : IBlock {
     // TODO: Enhancement -> When initializing the block from the BlockStorage, we can instantly read the first few bytes from the block
     // and pass them as an argument to the Block instance. Any reads and writes can then first access this section.
     // Reading and writing from header would not require accessing the stream, and sometimes the section might even contain all the data we need.
+    // We then write this section back into the stream when disposing of the block.
 
     public uint Id { get; set; }
     private Stream _stream;
 
     private bool _isDisposed = false;
+
+    // event which notifies subscribers that the block was disposed
+    public event EventHandler? DisposedEvent;
 
     // variable to track if the block was changed after the intial read
     private bool _pendingChanges = false;
@@ -127,13 +131,20 @@ public class Block : IBlock {
     }
 
     public void Dispose() {
-        if (_pendingChanges) {
-            _stream.Flush();
-        }
         if (!_isDisposed) {
+            if (_pendingChanges) {
+                _stream.Flush();
+            }
             _stream.Dispose();
             _isDisposed = true;
             _pendingChanges = false;
+
+            // Fire event to tell subscribers: block is disposed
+            if (DisposedEvent != null) {
+                DisposedEvent(this, EventArgs.Empty);
+            }
+
+            GC.SuppressFinalize(this);
         }
     }
 }
