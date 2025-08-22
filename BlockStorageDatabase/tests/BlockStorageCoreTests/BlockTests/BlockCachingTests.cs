@@ -1,5 +1,5 @@
 ﻿using BlockStorageCore.Entities;
-using BlockStorageCore.Enums;
+using BlockStorageCoreTests.Helpers;
 using Moq;
 
 namespace BlockStorageCoreTests.BlockTests;
@@ -21,19 +21,20 @@ public class BlockCachingTests {
                 var bytes = BitConverter.GetBytes(expectedValue);
                 bytes.CopyTo(buffer, offset);
             });
-
         mockStream.Setup(s => s.Length).Returns(4096);
         mockStream.Setup(s => s.CanSeek).Returns(true);
 
-        var block = new Block(mockStream.Object, blockId: 0);
+        var mockStorage = BlockStorageMocks.GetMockStorage();
+
+        var block = new Block(mockStream.Object, blockId: 0, mockStorage.Object);
 
         // == Act ==
 
         // Call 1 -> This should go to the stream to get the value.
-        var value1 = block.GetHeader(BlockHeader.PreviousBlockId);
+        var value1 = block.GetHeader(1);
 
         // Call 2 -> This should hit the cache
-        var value2 = block.GetHeader(BlockHeader.PreviousBlockId);
+        var value2 = block.GetHeader(1);
 
         // == Assert ==
 
@@ -53,16 +54,18 @@ public class BlockCachingTests {
         mockStream.Setup(s => s.CanSeek).Returns(true);
         mockStream.Setup(s => s.CanWrite).Returns(true);
 
-        var block = new Block(mockStream.Object, blockId: 0);
+        var mockStorage = BlockStorageMocks.GetMockStorage();
+
+        var block = new Block(mockStream.Object, blockId: 0, mockStorage.Object);
+
         long newValue = 123L;
-        BlockHeader header = BlockHeader.RecordLength;
 
         // == Act ==
         // SetHeader should write to the stream and update the cache.
-        block.SetHeader(header, newValue);
+        block.SetHeader(1, newValue);
 
         // GetHeader should find the value in the cache
-        var result = block.GetHeader(header);
+        var result = block.GetHeader(1);
 
         // == Assert ==
         Assert.Equal(newValue, result);

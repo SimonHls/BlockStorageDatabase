@@ -9,7 +9,7 @@ public interface IRecordStorage {
     /// <summary>
     /// Grab a record's data
     /// </summary>
-    byte[] Find(uint recordId);
+    byte[]? Find(uint recordId);
 
     /// <summary>
     /// This creates new empty record
@@ -23,7 +23,10 @@ public interface IRecordStorage {
 
     /// <summary>
     /// Similar to Create(byte[] data), but with dataGenerator which generates
-    /// data after a record is allocated
+    /// data after a record is allocated.
+    /// I needed to wrpa my head around this: 
+    /// Basically, the data generator allows us to so stuff with the alocated record id before giving the writer the data.
+    /// In our case, we use the record id to build up indexing for our new record. 
     /// </summary>
     uint Create(Func<uint, byte[]> dataGenerator);
 

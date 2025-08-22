@@ -1,6 +1,4 @@
-﻿using BlockStorageCore.Enums;
-
-namespace BlockStorageCore.Interfaces;
+﻿namespace BlockStorageCore.Interfaces;
 
 public interface IBlock : IDisposable {
     /// <summary>
@@ -14,13 +12,13 @@ public interface IBlock : IDisposable {
     /// A block may contain one ore more header metadata, 
     /// each header identified by a number and 8 bytes value.
     /// </summary>
-    long GetHeader(BlockHeader header);
+    long GetHeader(uint field);
 
     /// <summary>
     /// Change the value of specified header.
     /// Data must not be written to disk until the block is disposed.
     /// </summary>
-    void SetHeader(BlockHeader header, long value);
+    void SetHeader(uint field, long value);
 
     /// <summary>
     /// Read content of this block (src) into given buffer (dst)

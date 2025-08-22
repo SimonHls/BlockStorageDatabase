@@ -1,4 +1,5 @@
 ﻿using BlockStorageCore.Entities;
+using BlockStorageCoreTests.Helpers;
 
 namespace BlockStorageCoreTests.BlockTests;
 
@@ -21,7 +22,10 @@ public class BlockReadWriteTests {
         }
         stream.Position = 0;
 
-        Block block = new Block(stream, 0);
+        var mockStorage = BlockStorageMocks.GetMockStorage();
+
+        var block = new Block(stream, blockId: 0, mockStorage.Object);
+
 
         // == Act ==
         var resultBuffer = new byte[8]; // 8 bytes for a long
@@ -52,7 +56,9 @@ public class BlockReadWriteTests {
         }
         stream.Position = 0;
 
-        Block block = new Block(stream, 0);
+        var mockStorage = BlockStorageMocks.GetMockStorage();
+
+        Block block = new Block(stream, 0, mockStorage.Object);
 
         long expectedValue = 10;
 

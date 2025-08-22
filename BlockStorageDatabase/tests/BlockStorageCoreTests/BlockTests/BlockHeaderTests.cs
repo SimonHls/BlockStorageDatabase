@@ -1,5 +1,5 @@
 using BlockStorageCore.Entities;
-using BlockStorageCore.Enums;
+using BlockStorageCoreTests.Helpers;
 
 namespace BlockStorageCoreTests.BlockTests;
 
@@ -11,7 +11,7 @@ public class BlockHeaderTests : IDisposable {
 
     private readonly MemoryStream _stream;
     private readonly Block _block;
-    private readonly long[] _initialHeaderData = { 1, 2, 3, 4, 5, 6 };
+    private readonly long[] _initialHeaderData = { 1L, 2L, 3L, 4L, 5L, 6L };
 
     public BlockHeaderTests() {
         _stream = new MemoryStream();
@@ -22,7 +22,9 @@ public class BlockHeaderTests : IDisposable {
         }
         _stream.Position = 0;
 
-        _block = new Block(_stream, blockId: 0);
+        var mockStorage = BlockStorageMocks.GetMockStorage();
+
+        _block = new Block(_stream, blockId: 0, mockStorage.Object);
     }
 
     public void Dispose() {
@@ -33,10 +35,18 @@ public class BlockHeaderTests : IDisposable {
     [Fact]
     public void GetHeader_ReturnsCorrectHeaderFromValidStream() {
         // == Act ==
-        var headerVal = _block.GetHeader(BlockHeader.PreviousBlockId); // This is field id 1
+        var headerVal0 = _block.GetHeader(0);
+        var headerVal1 = _block.GetHeader(1);
+        var headerVal2 = _block.GetHeader(2);
+        var headerVal3 = _block.GetHeader(3);
+        var headerVal4 = _block.GetHeader(4);
 
         // == Assert ==
-        Assert.Equal(2, headerVal);
+        Assert.Equal(1, headerVal0);
+        Assert.Equal(2, headerVal1);
+        Assert.Equal(3, headerVal2);
+        Assert.Equal(4, headerVal3);
+        Assert.Equal(5, headerVal4);
     }
 
     [Fact]
@@ -45,7 +55,7 @@ public class BlockHeaderTests : IDisposable {
         _block.Dispose();
 
         // == Act ==
-        Action act = () => _block.GetHeader(BlockHeader.PreviousBlockId); // This is field id 1
+        Action act = () => _block.GetHeader(1);
         var ex = Record.Exception(act);
 
         // == Assert ==
@@ -56,7 +66,7 @@ public class BlockHeaderTests : IDisposable {
     [Fact]
     public void SetHeader_CanUpdateHeaderValueOnValidStream() {
         // == Act ==
-        var targetHeader = BlockHeader.NextBlockId;
+        uint targetHeader = 1;
         _block.SetHeader(targetHeader, 3); // change index 1 from 2 to 3
         var headerVal = _block.GetHeader(targetHeader); // This is field id 1
 
@@ -70,7 +80,7 @@ public class BlockHeaderTests : IDisposable {
         _block.Dispose();
 
         // == Act ==
-        Action act = () => _block.SetHeader(BlockHeader.NextBlockId, 3);
+        Action act = () => _block.SetHeader(1, 3);
         var ex = Record.Exception(act);
 
         // == Assert ==

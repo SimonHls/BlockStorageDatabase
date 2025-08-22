@@ -1,6 +1,6 @@
 ﻿namespace BlockStorageCore.Enums;
 
-public enum BlockHeader {
+public enum DataBlockHeader {
     NextBlockId = 0,
     PreviousBlockId = 1,
     RecordLength = 2,

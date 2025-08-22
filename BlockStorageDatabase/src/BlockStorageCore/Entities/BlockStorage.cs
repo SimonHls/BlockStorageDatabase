@@ -1,5 +1,4 @@
-﻿using BlockStorageCore.Constants;
-using BlockStorageCore.Interfaces;
+﻿using BlockStorageCore.Interfaces;
 
 namespace BlockStorageCore.Entities;
 
@@ -8,27 +7,45 @@ public class BlockStorage : IBlockStorage {
     private readonly Stream _stream;
     private readonly Dictionary<uint, Block> blockCache = new Dictionary<uint, Block>();
 
+    public int BlockContentSize { get; init; }
 
-    public BlockStorage(Stream stream) {
+    public int BlockHeaderSize { get; init; }
+
+    public int BlockHeaderFieldSize { get; init; } // long 
+
+    public int BlockSize { get; init; }
+
+    public BlockStorage(Stream stream, int blockSize, int blockHeaderSize) {
         if (stream == null)
             throw new ArgumentNullException(nameof(stream));
+        if (blockSize < 0)
+            throw new ArgumentOutOfRangeException(nameof(blockSize), "Block size must not be negative");
+        if (blockHeaderSize > blockSize / 2)
+            throw new ArgumentOutOfRangeException(nameof(blockHeaderSize), "Block header cannot be greater than 50% of total block size");
+        // TODO: Remove magic number
+        if (blockHeaderSize < 32)
+            throw new ArgumentOutOfRangeException(nameof(blockHeaderSize), "Block header must be at least 32 bytes long.");
 
         _stream = stream;
+        this.BlockSize = blockSize;
+        this.BlockHeaderSize = blockHeaderSize;
+        this.BlockContentSize = blockSize - blockHeaderSize;
+        this.BlockHeaderFieldSize = 8; // 8 bytes = long. This should probably be configured somewhere else.
     }
 
 
     public IBlock CreateNew() {
         var streamLen = _stream.Length;
 
-        if (streamLen % BlockConstants.TotalSize != 0)
+        if (streamLen % BlockSize != 0)
             throw new DataMisalignedException("The stream length must be a multiple of the block length! Stream length: " + streamLen);
 
-        var newBlockId = (uint)Math.Ceiling((double)streamLen / BlockConstants.TotalSize);
+        var newBlockId = (uint)Math.Ceiling((double)streamLen / BlockSize);
 
-        _stream.SetLength(streamLen + BlockConstants.TotalSize);
+        _stream.SetLength(streamLen + BlockSize);
         _stream.Flush();
 
-        var block = new Block(_stream, newBlockId);
+        var block = new Block(_stream, newBlockId, this);
         OnBlockInit(block);
 
         return block;
@@ -39,12 +56,12 @@ public class BlockStorage : IBlockStorage {
         if (blockCache.ContainsKey(blockId))
             return blockCache[blockId];
 
-        var blockPosition = blockId * BlockConstants.TotalSize;
-        if (blockId < 0 || blockPosition + BlockConstants.TotalSize > _stream.Length)
+        var blockPosition = blockId * BlockSize;
+        if (blockId < 0 || blockPosition + BlockSize > _stream.Length)
             throw new ArgumentOutOfRangeException(nameof(blockId), "The provided block id is outside the stream range.");
 
         // Get block from stream
-        Block newBlock = new Block(_stream, blockId);
+        Block newBlock = new Block(_stream, blockId, this);
         OnBlockInit(newBlock);
 
         return newBlock;

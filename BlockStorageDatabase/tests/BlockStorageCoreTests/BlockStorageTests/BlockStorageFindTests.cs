@@ -12,7 +12,7 @@ public class BlockStorageFindTests {
         stream.Flush();
         stream.Position = 0;
 
-        BlockStorage storage = new BlockStorage(stream);
+        BlockStorage storage = new BlockStorage(stream, blockSize: 4096, blockHeaderSize: 48);
 
         // create a block we later find
         var createdBlock = storage.CreateNew(); // Id is  0, it's the first block
@@ -32,7 +32,7 @@ public class BlockStorageFindTests {
         stream.Flush();
         stream.Position = 0;
 
-        BlockStorage storage = new BlockStorage(stream);
+        BlockStorage storage = new BlockStorage(stream, blockSize: 4096, 48);
 
         // == Act ==
         Action act = () => storage.Find(blockId: 0); // There is no block in the stream
