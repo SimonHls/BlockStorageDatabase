@@ -101,7 +101,70 @@ public class RecordStorage : IRecordStorage {
     }
 
     public void Delete(uint recordId) {
-        throw new NotImplementedException();
+        using (var firstBlock = _blockStorage.Find(recordId)) {
+            IBlock? currentBlock = firstBlock;
+            if (currentBlock == null) return;
+
+            while (true) {
+                IBlock? nextBlock = null;
+
+                using (currentBlock) {
+
+                    MarkAsFree(currentBlock);
+
+                    var nextBlockId = (uint)currentBlock.GetHeader(kNextBlockId);
+                    if (nextBlockId == 0) break;
+                    else {
+                        nextBlock = _blockStorage.Find(nextBlockId);
+                        if (nextBlock == null) {
+                            throw new InvalidDataException("Block not found by id: " + nextBlockId);
+                        }
+                    }
+                }
+
+                currentBlock = nextBlock;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Adds a block to the free list and sets the deleted flag on the block.
+    /// This does not reset any other header data, since the reset is done on allocation anyways.
+    /// </summary>
+    /// <param name="block">The block to mark as free</param>
+    /// <exception cref="Exception">Is thrown when ne free block record was found</exception>
+    private void MarkAsFree(IBlock block) {
+        IBlock? lastBlock = null;
+        IBlock? secondLastBlock = null;
+
+        // We don't need secondLastBlock, but the method returns it.
+        GetLastTwoBlockOfFreeBlocksRecord(out lastBlock, out secondLastBlock);
+
+        using (lastBlock)
+        using (secondLastBlock) {
+
+            if (lastBlock == null)
+                throw new Exception("Could not add record to free list, free list not found.");
+
+            // Add block id to free list
+            var lastBlockContentLength = lastBlock.GetHeader(kBlockContentLength);
+            var spaceLeft = _blockStorage.BlockContentSize - lastBlockContentLength;
+            if (spaceLeft >= ByteLengths.Int32Len) {
+                AddUint32ToBlockData(lastBlock, block.Id);
+                lastBlock.SetHeader(kBlockContentLength, lastBlockContentLength + ByteLengths.UInt32Len);
+            } else {
+
+                using (var newBlock = _blockStorage.CreateNew()) {
+                    newBlock.SetHeader(kPreviousBlockId, lastBlock.Id);
+                    lastBlock.SetHeader(kNextBlockId, newBlock.Id);
+
+                    AddUint32ToBlockData(newBlock, block.Id);
+                    newBlock.SetHeader(kBlockContentLength, ByteLengths.UInt32Len);
+                }
+            }
+            block.SetHeader(kIsDeleted, 1L);
+
+        }
     }
 
     public byte[]? Find(uint recordId) {
