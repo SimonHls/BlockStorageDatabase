@@ -51,15 +51,15 @@ public class BlockStorage : IBlockStorage {
         return block;
     }
 
-    public IBlock Find(uint blockId) {
+    public IBlock? Find(uint blockId) {
         // Check the cache
         if (blockCache.ContainsKey(blockId))
             return blockCache[blockId];
 
         var blockPosition = blockId * BlockSize;
-        if (blockId < 0 || blockPosition + BlockSize > _stream.Length)
-            throw new ArgumentOutOfRangeException(nameof(blockId), "The provided block id is outside the stream range.");
-
+        if ((blockPosition + BlockSize) > _stream.Length) {
+            return null;
+        }
         // Get block from stream
         Block newBlock = new Block(_stream, blockId, this);
         OnBlockInit(newBlock);

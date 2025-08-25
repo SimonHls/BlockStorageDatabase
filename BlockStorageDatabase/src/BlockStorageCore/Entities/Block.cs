@@ -66,7 +66,7 @@ public class Block : IBlock {
         if (_isDisposed)
             throw new ObjectDisposedException(nameof(Block));
 
-        long positionInStream = _storage.BlockSize * Id + field * _storage.BlockHeaderSize;
+        long positionInStream = _storage.BlockSize * Id + field * _storage.BlockHeaderFieldSize;
         if (positionInStream > _stream.Length || positionInStream < 0)
             throw new ArgumentOutOfRangeException(nameof(field), "Could not get header, calculated header position is outside the stream,");
 
@@ -132,7 +132,6 @@ public class Block : IBlock {
             if (_pendingChanges) {
                 _stream.Flush();
             }
-            _stream.Dispose();
             _isDisposed = true;
             _pendingChanges = false;
 

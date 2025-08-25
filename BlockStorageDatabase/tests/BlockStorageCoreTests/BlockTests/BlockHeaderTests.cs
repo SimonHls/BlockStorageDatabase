@@ -66,12 +66,17 @@ public class BlockHeaderTests : IDisposable {
     [Fact]
     public void SetHeader_CanUpdateHeaderValueOnValidStream() {
         // == Act ==
-        uint targetHeader = 1;
-        _block.SetHeader(targetHeader, 3); // change index 1 from 2 to 3
-        var headerVal = _block.GetHeader(targetHeader); // This is field id 1
+        uint targetHeader1 = 1;
+        uint targetHeader2 = 4;
+        _block.SetHeader(targetHeader1, 3); // change index 1 from 2 to 3
+        _block.SetHeader(targetHeader2, 8); // change index 4 from 5 to 8
+
+        var headerVal1 = _block.GetHeader(targetHeader1);
+        var headerVal2 = _block.GetHeader(targetHeader2);
 
         // == Assert ==
-        Assert.Equal(3, headerVal);
+        Assert.Equal(3, headerVal1);
+        Assert.Equal(8, headerVal2);
     }
 
     [Fact]

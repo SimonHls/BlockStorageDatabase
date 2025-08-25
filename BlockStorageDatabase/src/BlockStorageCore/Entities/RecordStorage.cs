@@ -1,5 +1,4 @@
 ﻿using BlockStorageCore.Constants;
-using BlockStorageCore.Enums;
 using BlockStorageCore.Helpers;
 using BlockStorageCore.Interfaces;
 
@@ -68,8 +67,9 @@ public class RecordStorage : IRecordStorage {
                 IBlock? nextBlock = null;
 
                 using (currentBlock) {
-                    var writeBatchLength = (int)Math.Min(totalDataToBeWritten - dataWritten, currentBlock.GetHeader(kBlockContentLength));
+                    var writeBatchLength = Math.Min(totalDataToBeWritten - dataWritten, _blockStorage.BlockContentSize);
                     currentBlock.Write(data, dataWritten, dstOffset: 0, writeBatchLength);
+                    currentBlock.SetHeader(kBlockContentLength, writeBatchLength);
                     dataWritten += writeBatchLength;
 
                     // Still data left to write? get new block and continue
@@ -123,7 +123,7 @@ public class RecordStorage : IRecordStorage {
             var recordData = new byte[totalRecordSize];
             var bytesRead = 0;
 
-            IBlock currentBlock = firstBlock;
+            IBlock? currentBlock = firstBlock;
 
             while (true) {
                 uint nextBlockId;
@@ -156,7 +156,7 @@ public class RecordStorage : IRecordStorage {
     /// <returns>A free block</returns>
     private IBlock AllocateBlock() {
         uint freeBlockId;
-        IBlock newBlock;
+        IBlock? newBlock;
 
         // See if we have a free block
         if (TryFindFreeBlock(out freeBlockId)) {
@@ -184,7 +184,7 @@ public class RecordStorage : IRecordStorage {
 
         IBlock? lastBlock;
         IBlock? secondLastBlock;
-        GetLastTwoBlockOfFreeBlocksRecord(out lastBlock, out secondLastBlock);
+        GetLastTwoBlockOfFreeBlocksRecord(out lastBlock, out secondLastBlock); // innocent
 
         // using to make sure we dispose the blocks
         using (lastBlock)
@@ -266,7 +266,7 @@ public class RecordStorage : IRecordStorage {
         lastBlock = null;
         secondLastBlock = null;
 
-        var recordBlocks = FindBlocksForRecord(0);
+        var recordBlocks = FindBlocksForRecord(0); // Innocent
 
         try {
             if (recordBlocks == null) {
@@ -281,7 +281,7 @@ public class RecordStorage : IRecordStorage {
         finally {
             if (recordBlocks != null)
                 // Dispose all unused blocks
-                foreach (Block b in recordBlocks) {
+                foreach (var b in recordBlocks) {
                     if ((lastBlock == null || b != lastBlock)
                              && (secondLastBlock == null || b != secondLastBlock)) {
                         b.Dispose();
@@ -302,32 +302,27 @@ public class RecordStorage : IRecordStorage {
 
         try {
             var currentBlockId = recordId;
-            IBlock? currentBlock = null; // Use nullable reference type
 
-            while (currentBlockId != 0) {
-                currentBlock = _blockStorage.Find(currentBlockId);
-
-                if (currentBlock == null) {
-                    // Handle the special case for creating block #0
-                    if (currentBlockId == recordId && recordId == 0) {
-                        currentBlock = _blockStorage.CreateNew();
+            do {
+                // Grab next block
+                var block = _blockStorage.Find(currentBlockId);
+                if (block == null) {
+                    // Special case: if block #0 never created, then attempt to create it
+                    if (currentBlockId == 0) {
+                        block = _blockStorage.CreateNew();
                     } else {
-                        throw new Exception($"Block not found by id: {currentBlockId}");
+                        throw new Exception("Block not found by id: " + currentBlockId);
                     }
                 }
+                blocks.Add(block);
 
-                if (currentBlock.GetHeader((int)DataBlockHeader.IsDeleted) == 1L) {
-                    throw new InvalidDataException($"Encountered deleted block in chain: {currentBlockId}");
+                if (1L == block.GetHeader(kIsDeleted)) {
+                    throw new InvalidDataException("Block not found: " + currentBlockId);
                 }
 
-                blocks.Add(currentBlock);
-                currentBlockId = (uint)currentBlock.GetHeader((int)DataBlockHeader.NextBlockId);
-            }
-
-            // Handle  case where the initial recordId didn't exist and wasn't #0
-            if (blocks.Count == 0 && recordId != 0) {
-                throw new Exception($"Block not found by id: {recordId}");
-            }
+                // Move next
+                currentBlockId = (uint)block.GetHeader(kNextBlockId);
+            } while (currentBlockId != 0);
 
             success = true;
             return blocks;

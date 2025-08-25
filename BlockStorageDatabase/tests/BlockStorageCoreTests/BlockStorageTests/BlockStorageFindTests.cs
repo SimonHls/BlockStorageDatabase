@@ -25,7 +25,7 @@ public class BlockStorageFindTests {
     }
 
     [Fact]
-    public void Find_ThrowsErrorIfBlockIdDoesNotExist() {
+    public void Find_ReturnsNullIfBlockIdDoesNotExist() {
         // == Arrange ==
         var stream = new MemoryStream();
         stream.SetLength(0);
@@ -35,12 +35,11 @@ public class BlockStorageFindTests {
         BlockStorage storage = new BlockStorage(stream, blockSize: 4096, 48);
 
         // == Act ==
-        Action act = () => storage.Find(blockId: 0); // There is no block in the stream
-        Exception ex = Record.Exception(act);
+        var block = storage.Find(blockId: 0); // There is no block in the stream
+
 
         // == Assert ==
-        Assert.NotNull(ex);
-        Assert.IsType<ArgumentOutOfRangeException>(ex);
+        Assert.Null(block);
     }
 
 }
