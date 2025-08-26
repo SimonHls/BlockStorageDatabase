@@ -2,6 +2,7 @@
 using BlockStorageCoreTests.Helpers;
 
 namespace BlockStorageCoreTests.RecordStorageTests;
+
 public class DeleteTests {
     [Fact]
     void Delete_FreesUpMultipleBlocks_WhichAreThenReusable() {
@@ -46,5 +47,7 @@ public class DeleteTests {
 
         // stream has 3 blocks total
         Assert.Equal(expectedStreamLength, stream.Length);
+
+        stream.Dispose();
     }
 }

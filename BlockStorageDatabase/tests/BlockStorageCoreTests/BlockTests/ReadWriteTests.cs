@@ -3,7 +3,7 @@ using BlockStorageCoreTests.Helpers;
 
 namespace BlockStorageCoreTests.BlockTests;
 
-public class BlockReadWriteTests {
+public class ReadWriteTests {
 
     [Fact]
     public void Read_CanReadFromValidStream() {

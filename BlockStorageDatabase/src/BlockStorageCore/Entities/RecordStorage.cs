@@ -100,6 +100,112 @@ public class RecordStorage : IRecordStorage {
         }
     }
 
+    public byte[]? Find(uint recordId) {
+
+        // Get first block
+        using (var firstBlock = _blockStorage.Find(recordId)) {
+            if (firstBlock == null) return null;
+
+            if (firstBlock.GetHeader(kIsDeleted) == 1L) return null;
+
+            // Block is not the first block
+            if (firstBlock.GetHeader(kPreviousBlockId) != 0L) return null;
+
+            var totalRecordSize = firstBlock.GetHeader(kRecordLength);
+            if (totalRecordSize > MaxRecordSize) {
+                throw new NotSupportedException("Unexpected record length: " + totalRecordSize);
+            }
+
+            var recordData = new byte[totalRecordSize];
+            var bytesRead = 0;
+
+            IBlock? currentBlock = firstBlock;
+
+            while (true) {
+                uint nextBlockId;
+
+                using (currentBlock) {
+                    var currentBlockContentLength = (int)currentBlock.GetHeader(kBlockContentLength);
+                    currentBlock.Read(recordData, bytesRead, 0, currentBlockContentLength);
+                    bytesRead += currentBlockContentLength;
+
+                    nextBlockId = (uint)currentBlock.GetHeader(kNextBlockId);
+                    if (nextBlockId == 0)
+                        return recordData;
+                }
+
+                currentBlock = _blockStorage.Find(nextBlockId);
+                if (currentBlock == null) {
+                    throw new InvalidDataException("Could not find block: " + nextBlockId);
+                }
+            }
+        }
+    }
+
+    public void Update(uint recordId, byte[] data) {
+        var recordBlocks = FindBlocksForRecord(recordId);
+
+        var dataWritten = 0;
+        var dataToWrite = data.Length;
+        var firstBlock = recordBlocks[0];
+        firstBlock.SetHeader(kRecordLength, dataToWrite);
+
+        foreach (var block in recordBlocks) {
+            if (dataToWrite > dataWritten) {
+                var currentWriteBatchLength = Math.Min(dataToWrite - dataWritten, _blockStorage.BlockContentSize);
+                block.Write(data, dataWritten, 0, currentWriteBatchLength);
+                block.SetHeader(kBlockContentLength, currentWriteBatchLength);
+                dataWritten += currentWriteBatchLength;
+                // We wrote all data, so we start breaking the chain
+                if (dataToWrite <= dataWritten)
+                    block.SetHeader(kNextBlockId, 0L);
+            } else {
+                MarkAsFree(block);
+                block.SetHeader(kPreviousBlockId, 0L);
+                block.SetHeader(kNextBlockId, 0L);
+            }
+
+        }
+
+        // still data left after using original blocks -> allocate new ones until we're done
+        if (dataToWrite > dataWritten) {
+
+            IBlock currentBlock = AllocateBlock();
+            // link new block with last block in chain
+            var lastBlockInChain = recordBlocks[recordBlocks.Count - 1];
+            lastBlockInChain.SetHeader(kNextBlockId, currentBlock.Id);
+            currentBlock.SetHeader(kPreviousBlockId, lastBlockInChain.Id);
+            recordBlocks.Add(currentBlock);
+
+            IBlock? nextBlock = null;
+            while (dataToWrite > dataWritten) {
+                var currentWriteBatchLength = Math.Min(dataToWrite - dataWritten, _blockStorage.BlockContentSize);
+                currentBlock.Write(data, dataWritten, 0, currentWriteBatchLength);
+                currentBlock.SetHeader(kBlockContentLength, currentWriteBatchLength);
+                dataWritten += currentWriteBatchLength;
+
+                // We wrote all data -> break
+                if (dataToWrite <= dataWritten)
+                    break;
+
+                nextBlock = AllocateBlock();
+                if (nextBlock == null)
+                    throw new InvalidDataException("Could not allocate block.");
+
+                nextBlock.SetHeader(kPreviousBlockId, currentBlock.Id);
+                currentBlock.SetHeader(kNextBlockId, nextBlock.Id);
+                recordBlocks.Add(nextBlock);
+
+                currentBlock = nextBlock;
+            }
+        }
+
+        foreach (var block in recordBlocks) {
+            if (block != null)
+                block.Dispose();
+        }
+    }
+
     public void Delete(uint recordId) {
         using (var firstBlock = _blockStorage.Find(recordId)) {
             IBlock? currentBlock = firstBlock;
@@ -163,54 +269,7 @@ public class RecordStorage : IRecordStorage {
                 }
             }
             block.SetHeader(kIsDeleted, 1L);
-
         }
-    }
-
-    public byte[]? Find(uint recordId) {
-
-        // Get first block
-        using (var firstBlock = _blockStorage.Find(recordId)) {
-            if (firstBlock == null) return null;
-
-            if (firstBlock.GetHeader(kIsDeleted) == 1L) return null;
-
-            // Block is not the first block
-            if (firstBlock.GetHeader(kPreviousBlockId) != 0L) return null;
-
-            var totalRecordSize = firstBlock.GetHeader(kRecordLength);
-            if (totalRecordSize > MaxRecordSize) {
-                throw new NotSupportedException("Unexpected record length: " + totalRecordSize);
-            }
-
-            var recordData = new byte[totalRecordSize];
-            var bytesRead = 0;
-
-            IBlock? currentBlock = firstBlock;
-
-            while (true) {
-                uint nextBlockId;
-
-                using (currentBlock) {
-                    var currentBlockContentLength = (int)currentBlock.GetHeader(kBlockContentLength);
-                    currentBlock.Read(recordData, bytesRead, 0, currentBlockContentLength);
-                    bytesRead += currentBlockContentLength;
-
-                    nextBlockId = (uint)currentBlock.GetHeader(kNextBlockId);
-                    if (nextBlockId == 0)
-                        return recordData;
-                }
-
-                currentBlock = _blockStorage.Find(nextBlockId);
-                if (currentBlock == null) {
-                    throw new InvalidDataException("Could not find block: " + nextBlockId);
-                }
-            }
-        }
-    }
-
-    public void Update(uint recordId, byte[] data) {
-        throw new NotImplementedException();
     }
 
     /// <summary>

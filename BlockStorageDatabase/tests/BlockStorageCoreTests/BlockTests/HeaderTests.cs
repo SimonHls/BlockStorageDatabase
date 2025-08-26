@@ -7,13 +7,13 @@ namespace BlockStorageCoreTests.BlockTests;
 /// Tests for the block methods touching the block header,
 /// ReadHeader() and WriteHeader()
 /// </summary>
-public class BlockHeaderTests : IDisposable {
+public class HeaderTests : IDisposable {
 
     private readonly MemoryStream _stream;
     private readonly Block _block;
     private readonly long[] _initialHeaderData = { 1L, 2L, 3L, 4L, 5L, 6L };
 
-    public BlockHeaderTests() {
+    public HeaderTests() {
         _stream = new MemoryStream();
         using (var writer = new BinaryWriter(_stream, System.Text.Encoding.UTF8, leaveOpen: true)) {
             foreach (var value in _initialHeaderData) {

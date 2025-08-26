@@ -21,6 +21,8 @@ public class CreateAndFindTests {
         // == Assert ==
         Assert.Equal(1, (int)newRecordId);
         Assert.Equal(testData, recordData);
+
+        stream.Dispose();
     }
 
     [Fact]
@@ -45,6 +47,8 @@ public class CreateAndFindTests {
         Assert.Equal(testData, recordData);
         Assert.NotNull(lastBlock);
         Assert.Equal(3, (int)lastBlock.Id);
+
+        stream.Dispose();
     }
 
 }

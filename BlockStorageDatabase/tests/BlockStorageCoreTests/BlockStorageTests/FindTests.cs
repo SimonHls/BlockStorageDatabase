@@ -2,7 +2,7 @@
 
 namespace BlockStorageCoreTests.BlockStorageTests;
 
-public class BlockStorageFindTests {
+public class FindTests {
     [Fact]
     public void Find_ReturnsBlockIfItAlreadyExists() {
 

@@ -4,7 +4,7 @@ using Moq;
 
 namespace BlockStorageCoreTests.BlockTests;
 
-public class BlockCachingTests {
+public class CachingTests {
 
     [Fact]
     public void GetHeader_CachesValue_AfterFirstRead() {

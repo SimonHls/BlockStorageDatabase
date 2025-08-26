@@ -3,7 +3,7 @@ using BlockStorageCore.Enums;
 
 namespace BlockStorageCoreTests.BlockStorageTests;
 
-public class BlockStorageCreateTests {
+public class CreateTests {
     [Fact]
     public void Create_ExtendsStreamAndReturnsNewBlock() {
         // == Arrange ==
