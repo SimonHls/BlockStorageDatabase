@@ -1,8 +1,9 @@
 ﻿using BlockStorageCore.Constants;
 using BlockStorageCore.Helpers;
 using BlockStorageCore.Interfaces;
+using BlockStorageCore.Interfaces.Storage;
 
-namespace BlockStorageCore.Entities;
+namespace BlockStorageCore.Entities.Storage;
 
 public class RecordStorage : IRecordStorage {
 
@@ -268,7 +269,9 @@ public class RecordStorage : IRecordStorage {
                     newBlock.SetHeader(kBlockContentLength, ByteLengths.UInt32Len);
                 }
             }
+            // Flag as deleted and clear out headers
             block.SetHeader(kIsDeleted, 1L);
+
         }
     }
 
@@ -286,12 +289,12 @@ public class RecordStorage : IRecordStorage {
             if (newBlock == null) {
                 throw new InvalidDataException("Block not found by id: " + freeBlockId);
             }
-            // Clear out headers
+            // Remove deleted flag and reset headers
+            newBlock.SetHeader(kIsDeleted, 0L);
             newBlock.SetHeader(kBlockContentLength, 0L);
             newBlock.SetHeader(kNextBlockId, 0L);
             newBlock.SetHeader(kPreviousBlockId, 0L);
             newBlock.SetHeader(kRecordLength, 0L);
-            newBlock.SetHeader(kIsDeleted, 0L);
         } else {
             newBlock = _blockStorage.CreateNew();
             if (newBlock == null) {
@@ -348,7 +351,7 @@ public class RecordStorage : IRecordStorage {
     private uint ReadLastUint32FromBlockData(IBlock block) {
         var resultBuffer = new byte[ByteLengths.UInt32Len];
         var contentLength = block.GetHeader(kBlockContentLength);
-        if ((contentLength % ByteLengths.UInt32Len) != 0) {
+        if (contentLength % ByteLengths.UInt32Len != 0) {
             throw new DataMisalignedException("Block content length not %4: " + contentLength);
         }
 
@@ -377,7 +380,7 @@ public class RecordStorage : IRecordStorage {
             throw new ArgumentOutOfRangeException(nameof(value), "Cannot append uint32 to block content, block is full");
         }
 
-        if ((contentLength % ByteLengths.UInt32Len) != 0) {
+        if (contentLength % ByteLengths.UInt32Len != 0) {
             throw new DataMisalignedException("Block content length not %4: " + contentLength);
         }
 

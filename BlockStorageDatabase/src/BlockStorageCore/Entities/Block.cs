@@ -1,6 +1,7 @@
 ﻿using BlockStorageCore.Constants;
 using BlockStorageCore.Helpers;
 using BlockStorageCore.Interfaces;
+using BlockStorageCore.Interfaces.Storage;
 
 namespace BlockStorageCore.Entities;
 public class Block : IBlock {

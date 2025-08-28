@@ -1,4 +1,5 @@
 ﻿using BlockStorageCore.Entities;
+using BlockStorageCore.Entities.Storage;
 using BlockStorageCoreTests.Helpers;
 
 namespace BlockStorageCoreTests.RecordStorageTests;

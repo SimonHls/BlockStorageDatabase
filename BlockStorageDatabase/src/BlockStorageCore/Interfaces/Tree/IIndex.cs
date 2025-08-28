@@ -1,4 +1,4 @@
-﻿namespace BlockStorageCore.Interfaces;
+﻿namespace BlockStorageCore.Interfaces.Tree;
 
 public interface IIndex<K, V> {
     /// <summary>

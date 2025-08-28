@@ -1,31 +1,36 @@
-﻿namespace BlockStorageCore.Interfaces;
+﻿namespace BlockStorageCore.Interfaces.Storage;
 
-public interface IBlockStorage {
+public interface IBlockStorage
+{
     /// <summary>
     /// Number of bytes of custom data per block that this storage can handle.
     /// </summary>
-    int BlockContentSize {
+    int BlockContentSize
+    {
         get;
     }
 
     /// <summary>
     /// Total number of bytes in header
     /// </summary>
-    int BlockHeaderSize {
+    int BlockHeaderSize
+    {
         get;
     }
 
     /// <summary>
     /// The size of one header field in bytes
     /// </summary>
-    int BlockHeaderFieldSize {
+    int BlockHeaderFieldSize
+    {
         get;
     }
 
     /// <summary>
     /// Total block size, equal to content size + header size, should be a multiple of 128B
     /// </summary>
-    int BlockSize {
+    int BlockSize
+    {
         get;
     }
 

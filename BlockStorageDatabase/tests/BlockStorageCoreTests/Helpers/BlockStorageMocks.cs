@@ -1,4 +1,4 @@
-﻿using BlockStorageCore.Interfaces;
+﻿using BlockStorageCore.Interfaces.Storage;
 using Moq;
 
 namespace BlockStorageCoreTests.Helpers;

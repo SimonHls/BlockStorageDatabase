@@ -1,4 +1,5 @@
 ﻿using BlockStorageCore.Interfaces;
+using BlockStorageCore.Interfaces.Storage;
 
 namespace BlockStorageCore.Entities;
 
